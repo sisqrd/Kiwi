@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Layout from './components/Layout/Layout';
-import Register from './containers/Register/Register';
-import Login from './containers/Login/Login';
+import Layout from './frontend/components/Layout/Layout';
+import Register from './frontend/containers/Register/Register';
+import Login from './frontend/containers/Login/Login';
 import './App.css';
 
 class App extends Component {
