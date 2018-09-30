@@ -2,6 +2,7 @@ import React from 'react';
 import Auxilary from '../../highorder/Auxilary';
 import Backdrop from './Backdrop';
 
+
 const modal = (props) => (
   <Auxilary>
     <Backdrop show = {props.show} clicked = {props.modalClosed} />

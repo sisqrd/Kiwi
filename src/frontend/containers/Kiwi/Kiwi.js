@@ -6,6 +6,7 @@ import Modal from '../../components/UI/Modal';
 import Auxilary from '../../highorder/Auxilary';
 import EditContact from './Contacts/EditContact';
 import AddContact from './Contacts/AddContact';
+import { Checkbox,Card, Button, Icon, Image, Item, Label,Form, Container} from 'semantic-ui-react'
 
 class Kiwi extends Component {
 
@@ -110,20 +111,28 @@ class Kiwi extends Component {
   render(){
     return(
     <Auxilary>
-      <div className = 'ContactList'>
+      <div className = 'ContactList' style={{margin:'20px', marginLeft:'30px', marginRight:'30px'}}>
+      <Card.Group itemsPerRow={5}>
         {this.state.contacts.map( (contact, index) =>
           <Auxilary>
-            <Contact
-              key = {contact.number}
-              name = {contact.name}
-              relationship = {contact.relationship}
-              number = {contact.number}
-              message = {contact.typedMessage}
-            />
-            <button onClick = {contact => this.editContactHandler(contact, index)}>Edit</button>
+            <Card
+                  style={{height:'100%'}}
+              >
+
+               <label style={{fontWeight:'bold'}} > Name: </label> 
+               {contact.name}
+               <label style={{fontWeight:'bold'}} > Relationship: </label> 
+               {contact.relationship}
+               <label style={{fontWeight:'bold'}} > Number: </label> 
+               {contact.number}
+               <label style={{fontWeight:'bold'}} > Message: </label> 
+               {contact.typedMessage}
+            <Button basic color ='olive' onClick = {contact => this.editContactHandler(contact, index)}>Edit</Button>
+            </Card> 
           </Auxilary>
       )
       }
+      </Card.Group> 
       </div>
 
       <div className = "AddContainer">

@@ -32,6 +32,10 @@ body {
   height: 100%;
 }
 
+.ContactList{
+  margin-top:50px;
+}
+
 .NavigationItems {
   flex-flow: row;
   margin: 0;
