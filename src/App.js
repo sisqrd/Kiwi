@@ -3,6 +3,7 @@ import firebase from 'firebase';
 import Layout from './frontend/components/Layout/Layout';
 import Register from './frontend/containers/Register/Register';
 import Login from './frontend/containers/Login/Login';
+import Kiwi from './frontend/containers/Kiwi/Kiwi'
 import './App.css';
 
 const config = {
@@ -19,7 +20,7 @@ class App extends Component {
 
   state = {
     loggedIn: false,
-    register: true,
+    register: false,
     username: '',
     password: ''
   }
@@ -48,7 +49,8 @@ class App extends Component {
       <div className="App">
         <Layout>
           {this.state.register ? <Register handleChange={this.handleChange} handleRegister={this.handleRegister} /> : null}
-          <Login />
+          {this.state.loggedIn ? <Login /> : null}
+          <Kiwi />
         </Layout>
       </div>
     );
