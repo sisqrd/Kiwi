@@ -26,15 +26,21 @@ class App extends Component {
 
   }
 
-  handleRegister = () => {
-
+  handleRegister = (event) => {
+    event.preventDefault();
+    const userData = firebase.database().ref('userData');
+    const accountInfo = {
+      username: this.state.username,
+      password: this.state.password
+    }
+    userData.push(accountInfo);
   }
 
   render() {
     return (
       <div className="App">
         <Layout>
-          <Register />
+          <Register handleRegister={this.handleRegister}/>
           <Login />
         </Layout>
       </div>
