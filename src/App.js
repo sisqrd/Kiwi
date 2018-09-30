@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <div className="App">
         <Layout>
-          <Register handleRegister={this.handleRegister}/>
+          {this.state.register ? <Register handleRegister={this.handleRegister} /> : null}
           <Login />
         </Layout>
       </div>

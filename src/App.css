@@ -6,6 +6,7 @@ html{
 .Title {
   color: #FFFFFF;
   font-size: 52px;
+  text-align: left;
 }
 
 .Content {
@@ -58,4 +59,20 @@ html{
   padding: 0 20px;
   box-sizing: border-box;
   z-index: 90;
+}
+
+.Logo {
+  height: 100%;
+  padding-right:10px;
+  padding-top: 8px
+}
+
+.Logo img{
+  height: 100%;
+}
+
+.ToolbarLogo {
+  height: 80%;
+  display: flex;
+  flex-flow: row;
 }

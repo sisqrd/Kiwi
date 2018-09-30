@@ -6,8 +6,8 @@ const toolbar = (props) => (
   <header className = "Toolbar">
     <div className = "ToolbarLogo">
       <Logo />
+      <div className = "Title">Kiwi</div>
     </div>
-    <div className = "Title">Kiwi</div>
     <nav>
       <NavigationItems />
     </nav>
