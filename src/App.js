@@ -39,7 +39,6 @@ class App extends Component {
       username: this.state.username,
       password: this.state.password
     }
-    console.log(accountInfo)
     userData.push(accountInfo);
   }
 
