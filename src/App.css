@@ -1,6 +1,23 @@
+App.css 
 html{
   background-color: #BDEDE0
 
+}
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+  font-family: 'Raleway', sans-serif;
+  color: olive;
+  font-weight: lighter
+}
+
+
+body {
+  height: 10px;
+  background-color: #BDEDE0;
 }
 
 .Title {
@@ -10,8 +27,9 @@ html{
 }
 
 .Content {
-  margin-top: 72px;
-  background-color: #BDEDE0
+  margin-top: 80px;
+  background-color: #BDEDE0;
+  height: 100%;
 }
 
 .NavigationItems {
@@ -22,10 +40,11 @@ html{
   display: flex;
   align-items: center;
   height: 100%;
+
 }
 
 .NavigationItem {
-  margin: 10px 0;
+  margin: 10px 10px 10px 10px;
   box-sizing: border-box;
   display: block;
   width: 100%;
@@ -33,11 +52,13 @@ html{
 }
 
 .NavigationItem a {
-  color: #FFFFFF;
+  color: olive;
   text-decoration: none;
   width: 100%;
   box-sizing: border-box;
   display: block;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px
 }
 
 .NavigationItem a:hover,
@@ -47,7 +68,8 @@ html{
 }
 
 .Toolbar {
-  height: 56px;
+  margin: 15px 10px 15px 10px;
+  height: 80px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -90,3 +112,4 @@ html{
     box-sizing: border-box;
     transition: all 0.3s ease-out;
 }
+
