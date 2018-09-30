@@ -12,7 +12,13 @@ class Kiwi extends Component {
   state = {
     adding: false,
     editing: false,
-    contacts: []
+    contacts: [],
+    editContact: {
+      name: '',
+      number: '',
+      relationship: '',
+      typedMessage: ''
+    }
   }
 
   componentDidMount() {
@@ -38,9 +44,21 @@ class Kiwi extends Component {
 
   // editContactSubmit =
 
-  editContactHandler = (index) => {
+  editContactHandler = (contact, index) => {
     console.log(index)
     console.log(this.state.contacts[index])
+    let editedContact = this.state.contacts[index];
+    let contactIndex = index;
+
+    this.setState({
+      editing: true,
+      editContact: {
+        name: editedContact.name,
+        number: editedContact.number,
+        relationship: editedContact.relationship,
+        typedMessage: editedContact.typedMessage
+      }
+    })
     // let contacts = []
     // const userData = firebase.database().ref().child('userData/'+this.props.userKey)
     // userData.once('value')
@@ -53,6 +71,10 @@ class Kiwi extends Component {
     //   })
     //   console.log(contacts)
     // })
+  }
+
+  editContactSubmit = (contact) => {
+    
   }
 
   editContactCancelHandler = () => {
@@ -98,7 +120,7 @@ class Kiwi extends Component {
               number = {contact.number}
               message = {contact.typedMessage}
             />
-            <button onClick = {(index) => this.editContactHandler(index)}>Edit</button>
+            <button onClick = {contact => this.editContactHandler(contact, index)}>Edit</button>
           </Auxilary>
       )
       }
@@ -117,6 +139,10 @@ class Kiwi extends Component {
 
       <Modal show={this.state.editing} modalClosed={this.editContactCancelHandler}>
         <EditContact
+          typedName = {this.state.editContact["name"]}
+          typedRelationship = {this.state.editContact["relationship"]}
+          typedNumber = {this.state.editContact["number"]}
+          typedMessage = {this.state.editContact["typedMessage"]}
           editContact = {this.editContactSubmit}
           closeModal = {this.editContactCancelHandler}
         />
