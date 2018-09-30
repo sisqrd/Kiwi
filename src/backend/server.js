@@ -1,7 +1,20 @@
 const express = require('express');
+<<<<<<< HEAD
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
+=======
+const firebase = require("firebase");
+var config = {
+  apiKey: "AIzaSyCoDCRFGKuNj_oBxQiLrClFlHlBlHkJjAQ",
+  authDomain: "tensile-psyche-218000.firebaseapp.com",
+  databaseURL: "https://tensile-psyche-218000.firebaseio.com",
+  projectId: "tensile-psyche-218000",
+  storageBucket: "tensile-psyche-218000.appspot.com",
+  messagingSenderId: "271934682296"
+};
+firebase.initializeApp(config)
+>>>>>>> 5c393c1044030e861de3515be969a668425a601f
 
 const app = express();
 const port = process.env.PORT || 5000;
