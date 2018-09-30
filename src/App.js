@@ -19,7 +19,13 @@ class App extends Component {
 
   state = {
     loggedIn: false,
-    register: false,
+    register: true,
+    username: '',
+    password: ''
+  }
+
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value});
   }
 
   handleLogin = () => {
@@ -33,6 +39,7 @@ class App extends Component {
       username: this.state.username,
       password: this.state.password
     }
+    console.log(accountInfo)
     userData.push(accountInfo);
   }
 
@@ -40,7 +47,7 @@ class App extends Component {
     return (
       <div className="App">
         <Layout>
-          {this.state.register ? <Register handleRegister={this.handleRegister} /> : null}
+          {this.state.register ? <Register handleChange={this.handleChange} handleRegister={this.handleRegister} /> : null}
           <Login />
         </Layout>
       </div>
