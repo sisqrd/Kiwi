@@ -41,7 +41,6 @@ class App extends Component {
 
   handleLogin = (event) => {
     event.preventDefault();
-    // let that = this
     const query = firebase.database().ref('userData')
     query.once('value')
     .then(snapshot => {
@@ -57,7 +56,6 @@ class App extends Component {
           alert('Incorrect Password')
         }
       })
-      alert('Please register an account.')
     })
   };
 
@@ -82,13 +80,14 @@ class App extends Component {
             }
             userData.push(accountInfo);
             this.setState({
-              loggedIn: !this.state.loggedIn,
-              register: !this.state.register,
               userKey: childSnapshot.key
-            });
-            console.log(this.state.userKey)
+            })
           }
         })
+        this.setState({
+          loggedIn: !this.state.loggedIn,
+          register: !this.state.register,
+        });
       })
     } else {
       alert('Passwords must match.');
