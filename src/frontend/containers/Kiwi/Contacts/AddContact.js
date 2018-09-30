@@ -19,7 +19,6 @@ class AddContact extends React.Component {
     contact.relationship = this.state.typedRelationship;
     contact.number = this.state.typedName;
     contact.typedMessage = this.state.typedMessage
-    console.log(contact);
     this.props.addContact(contact)
     this.props.closeModal()
   }

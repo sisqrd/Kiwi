@@ -1,26 +1,10 @@
 import React, {Component} from 'react';
+import firebase from 'firebase';
 import Contact from './Contacts/Contact';
 import Modal from '../../components/UI/Modal';
 import Auxilary from '../../highorder/Auxilary';
 import EditContact from './Contacts/EditContact';
 import AddContact from './Contacts/AddContact';
-
-let arr = [
-  {
-  name: 'Perry',
-  relationship: 'friend',
-  number: '+12405996788',
-  message: 'yeeeeeeer'},
-  {
-  name: 'Mikee',
-  relationship: 'friend',
-  number: '+12405996788',
-  message: 'yeeeeeeer'},
-  {
-  name: 'Perry',
-  relationship: 'friend',
-  number: '+12405996788',
-  message: 'yeeeeeeer'}]
 
 class Kiwi extends Component {
 
@@ -30,24 +14,60 @@ class Kiwi extends Component {
     contacts: []
   }
 
-
   componentDidMount() {
-    this.setState({contacts: arr})
-  }
-
-  addContactSubmit = (contact) => {
-    console.log('THIS IS BEING CALLED');
-    let newArr = this.state.contacts.slice();
-    newArr.push(contact);
-    this.setState({
-      contacts: newArr
+    let contacts = []
+    const userData = firebase.database().ref().child('userData/'+this.props.userKey)
+    userData.once('value')
+    .then(snapshot => {
+      snapshot.forEach(childSnapshot => {
+        const childData = childSnapshot.val()
+        if (childData.name != undefined) {
+        let emergencyContact = {
+          name: childData.name,
+          number: childData.number,
+          relationship: childData.relationship,
+          typedMessage: childData.typedMessage
+        }
+        contacts.push(emergencyContact)
+        this.setState({contacts: contacts})
+      }
+      })
     })
   }
 
-  addContactHander = () => {
-    this.setState({
-      adding: true
-    });
+  // editContactSubmit =
+
+  editContactHandler = (index) => {
+    console.log(index)
+    console.log(this.state.contacts[index])
+    // let contacts = []
+    // const userData = firebase.database().ref().child('userData/'+this.props.userKey)
+    // userData.once('value')
+    // .then(snapshot => {
+    //   snapshot.forEach(childSnapshot => {
+    //     const childData = childSnapshot.val()
+    //     if (childData.name != undefined) {
+    //       contacts.push(childData)
+    //   }
+    //   })
+    //   console.log(contacts)
+    // })
+  }
+
+  editContactCancelHandler = () => {
+    this.setState({editing: false})
+  }
+
+  addContactSubmit = (contact) => {
+    let contacts = this.state.contacts
+    const userData = firebase.database().ref('userData/'+this.props.userKey);
+    userData.push(contact)
+    contacts.push(contact)
+    this.setState({contacts: contacts})
+  }
+
+  addContactHandler = () => {
+    this.setState({adding: true});
   }
 
   addContactCancelHandler = () => {
@@ -65,22 +85,29 @@ class Kiwi extends Component {
               name = {contact.name}
               relationship = {contact.relationship}
               number = {contact.number}
-              message = {contact.message}
+              message = {contact.typedMessage}
             />
-            <button onClick = {(contact, index) => this.editContactHandler(index)}>Edit</button>
+            <button onClick = {(index) => this.editContactHandler(index)}>Edit</button>
           </Auxilary>
       )
       }
       </div>
 
       <div className = "AddContainer">
-        <button onClick= {this.addContactHander} className= "AddButton">+</button>
+        <button onClick= {this.addContactHandler} className= "AddButton">+</button>
       </div>
 
       <Modal show = {this.state.adding} modalClosed = {this.addContactCancelHandler}>
         <AddContact
           addContact = {this.addContactSubmit}
           closeModal = {this.addContactCancelHandler}
+        />
+      </Modal>
+
+      <Modal show={this.state.editing} modalClosed={this.editContactCancelHandler}>
+        <EditContact
+          editContact = {this.editContactSubmit}
+          closeModal = {this.editContactCancelHandler}
         />
       </Modal>
     </Auxilary>

@@ -6,13 +6,11 @@ class Register extends Component {
   render(){
     return (
       <div className ="Register">
-      <form>
         <input  placeholder="Type in Username" name="username" onChange = {this.props.handleChange}></input>
         <input  placeholder="Type in Password" name="password" onChange = {this.props.handleChange}></input>
-        <input placeholder="Confirm Password"></input>
+        <input placeholder="Confirm Password" name="confirmPassword" onChange = {this.props.handleChange}></input>
         <button onClick ={this.props.handleRegister}>Register</button>
         <button>Cancel</button>
-      </form>
     </div>
   )
 }
