@@ -1,0 +1,92 @@
+html{
+  background-color: #BDEDE0
+
+}
+
+.Title {
+  color: #FFFFFF;
+  font-size: 52px;
+  text-align: left;
+}
+
+.Content {
+  margin-top: 72px;
+  background-color: #BDEDE0
+}
+
+.NavigationItems {
+  flex-flow: row;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.NavigationItem {
+  margin: 10px 0;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: 10px
+}
+
+.NavigationItem a {
+  color: #FFFFFF;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+
+.NavigationItem a:hover,
+.NavigationItem a:active,
+.NavigationItem a.active {
+  color: #40A4C8;
+}
+
+.Toolbar {
+  height: 56px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left:0;
+  background-color: #BDEDE0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 90;
+}
+
+.Logo {
+  height: 100%;
+  padding-right:10px;
+  padding-top: 8px
+}
+
+.Logo img{
+  height: 100%;
+}
+
+.ToolbarLogo {
+  height: 80%;
+  display: flex;
+  flex-flow: row;
+}
+
+.Modal {
+    position: fixed;
+    z-index: 500;
+    background-color: white;
+    width: 70%;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px black;
+    padding: 16px;
+    left: 15%;
+    top: 30%;
+    box-sizing: border-box;
+    transition: all 0.3s ease-out;
+}
