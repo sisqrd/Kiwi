@@ -19,7 +19,7 @@ class Register extends Component {
         <input  placeholder="Type in Username" name="username" onChange = {this.handleChange}></input>
         <input  placeholder="Type in Password" name="password" onChange = {this.handleChange}></input>
         <input placeholder="Confirm Password"></input>
-        <button>Register</button>
+        <button onClick ={this.props.handleRegister}>Register</button>
         <button>Cancel</button>
       </form>
     </div>
