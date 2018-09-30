@@ -8,16 +8,16 @@ class Register extends Component {
     password: ''
   }
 
-  handleChange(event) {
-    this.setState({})
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value});
   }
 
   render(){
     return (
       <Auxilary>
       <form className = "Register">
-        <input placeholder="Type in Username" name="username"></input>
-        <input placeholder="Type in Password" name="password"></input>
+        <input  placeholder="Type in Username" name="username" onChange = {this.handleChange}></input>
+        <input  placeholder="Type in Password" name="password" onChange = {this.handleChange}></input>
         <input placeholder="Confirm Password"></input>
         <button>Register</button>
         <button>Cancel</button>
