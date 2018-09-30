@@ -94,7 +94,7 @@ class Kiwi extends Component {
                 <label style={{fontWeight:'bold'}} > Contact Number: </label> 
                 {contact.number}
                 <label style={{fontWeight:'bold'}} > Message: </label> 
-                {contact.typedMessage}
+                {contact.typedMessage} 
                
               </Card.Content>
               <Button basic color='olive' onClick = {(index) => this.editContactHandler(index)}>Edit</Button>
