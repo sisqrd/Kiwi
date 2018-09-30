@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import firebase from 'firebase';
+import axios from 'axios';
 import Contact from './Contacts/Contact';
 import Modal from '../../components/UI/Modal';
 import Auxilary from '../../highorder/Auxilary';
@@ -64,6 +65,16 @@ class Kiwi extends Component {
     userData.push(contact)
     contacts.push(contact)
     this.setState({contacts: contacts})
+    console.log(this.state.contacts)
+    axios.post('/contacts', {
+      contacts: this.state.contacts
+    })
+    .then(response => {
+    console.log(response);
+    })
+    .catch(error => {
+    console.log(error.response);
+    });
   }
 
   addContactHandler = () => {
