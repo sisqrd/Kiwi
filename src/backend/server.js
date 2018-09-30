@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-const contacts = []
+let contacts = []
 
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
@@ -25,17 +25,23 @@ app.post('/contacts', (req, res) => {
 
 app.post('/kiwi', (req, res) => {
   //get request to twilio
+
   Promise.all(
   contacts.map(contact => {
+    console.log(contact.number, contact.typedMessage);
     return client.messages.create({
       to: contact.number,
       from: process.env.TWILIO_MESSAGING_SERVICE_SID,
-      body: contact.message
+      body: contact.typedMessage
+      // to: '+19175260377',
+      // from: process.env.TWILIO_MESSAGING_SERVICE_SID,
+      // body: 'help'
     })
   })
   )
   .then(message => console.log('Messages sent!'))
-  .then(res.json({ 'kiwi': 'works'}));
+  .then(res.json({ 'kiwi': 'works'}))
+  .catch(err => console.log(err));
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
