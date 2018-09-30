@@ -1,3 +1,18 @@
+html{
+  background-color: #BDEDE0
+
+}
+
+.Title {
+  color: #FFFFFF;
+  font-size: 52px;
+}
+
+.Content {
+  margin-top: 72px;
+  background-color: #BDEDE0
+}
+
 .NavigationItems {
   flex-flow: row;
   margin: 0;
@@ -17,7 +32,7 @@
 }
 
 .NavigationItem a {
-  color: #FFED65;
+  color: #FFFFFF;
   text-decoration: none;
   width: 100%;
   box-sizing: border-box;
@@ -36,7 +51,7 @@
   position: fixed;
   top: 0;
   left:0;
-  background-color: #D7EBBA;
+  background-color: #BDEDE0;
   display: flex;
   justify-content: space-between;
   align-items: center;

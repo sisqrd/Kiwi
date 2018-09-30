@@ -11,6 +11,14 @@ class App extends Component {
     register: false,
   }
 
+  handleLogin = () => {
+
+  }
+
+  handleRegister = () => {
+
+  }
+
   render() {
     return (
       <div className="App">
