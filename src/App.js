@@ -5,6 +5,12 @@ import Login from './frontend/containers/Login/Login';
 import './App.css';
 
 class App extends Component {
+
+  state = {
+    loggedIn: false,
+    register: false,
+  }
+
   render() {
     return (
       <div className="App">
