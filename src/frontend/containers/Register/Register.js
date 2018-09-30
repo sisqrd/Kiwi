@@ -9,7 +9,7 @@ class Register extends Component {
   }
 
   handleChange(event) {
-    this.setState({})
+    this.setState({[event.target.name]: event.target.value});
   }
 
   render(){
