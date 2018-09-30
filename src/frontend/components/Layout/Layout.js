@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
-import Auxilary from '../../highorder/Auxilary';
 import Toolbar from '../Navigation/Toolbar/Toolbar'
 
 class Layout extends Component {
   render(){
     return(
-      <Auxilary>
-        <Toolbar />
+      <div style={{height:'100%', marginTop:"20px"}}>
+        <Toolbar style={{margin:'20px'}}/>
         <main className = "Content">
           {this.props.children}
         </main>
-      </Auxilary>
+      </div>
     )
   }
 }

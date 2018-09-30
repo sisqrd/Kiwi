@@ -5,6 +5,7 @@ import Modal from '../../components/UI/Modal';
 import Auxilary from '../../highorder/Auxilary';
 import EditContact from './Contacts/EditContact';
 import AddContact from './Contacts/AddContact';
+import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
 class Kiwi extends Component {
 
@@ -77,20 +78,42 @@ class Kiwi extends Component {
   render(){
     return(
     <Auxilary>
-      <div className = 'ContactList'>
+      <div className = 'ContactList' style={{display:'flex', padding:'20px', margin:'20px'}}>
+      <Card.Group itemsPerRow={5}>
         {this.state.contacts.map( (contact, index) =>
-          <Auxilary>
+          <div style={{padding:'20px'}}> 
+            <Card >
             <Contact
+              key = {contact.number}
+            />
+              <Card.Content style={{padding:'10px'}}>
+              <label style={{fontWeight:'bold'}} > Name: </label> 
+               {contact.name}
+               <label style={{fontWeight:'bold'}} > Relationship: </label> 
+                {contact.relationship}
+                <label style={{fontWeight:'bold'}} > Contact Number: </label> 
+                {contact.number}
+                <label style={{fontWeight:'bold'}} > Message: </label> 
+                {contact.typedMessage}
+               
+              </Card.Content>
+              <Button basic color='olive' onClick = {(index) => this.editContactHandler(index)}>Edit</Button>
+    
+          </Card>
+            {/* <Contact
               key = {contact.number}
               name = {contact.name}
               relationship = {contact.relationship}
               number = {contact.number}
               message = {contact.typedMessage}
             />
-            <button onClick = {(index) => this.editContactHandler(index)}>Edit</button>
-          </Auxilary>
-      )
-      }
+            <button onClick = {(index) => this.editContactHandler(index)}>Edit</button> */}
+            </div> 
+          )
+        }
+            </Card.Group>
+         
+    
       </div>
 
       <div className = "AddContainer">

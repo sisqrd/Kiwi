@@ -3,7 +3,7 @@ import NavigationItem from './NavigationItem';
 
 const navigationItems = () => (
   <ul className = "NavigationItems">
-    <NavigationItem>About</NavigationItem>
+    <NavigationItem >About</NavigationItem>
     <NavigationItem>Login/Register</NavigationItem>
   </ul>
 );
