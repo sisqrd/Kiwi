@@ -111,12 +111,13 @@ class Kiwi extends Component {
   render(){
     return(
     <Auxilary>
-      <div className = 'ContactList' style={{margin:'20px', marginLeft:'30px', marginRight:'30px'}}>
+      <div style={{margin:'20px'}}> 
+      <div className = 'ContactList' style={{margin:'20px', marginTop:'100px', marginLeft:'30px', marginRight:'30px'}}>
       <Card.Group itemsPerRow={5}>
         {this.state.contacts.map( (contact, index) =>
           <Auxilary>
             <Card
-                  style={{height:'100%'}}
+                  style={{height:'100%', padding:'15px'}}
               >
 
                <label style={{fontWeight:'bold'}} > Name: </label> 
@@ -135,9 +136,11 @@ class Kiwi extends Component {
       </Card.Group> 
       </div>
 
-      <div className = "AddContainer">
-        <button onClick= {this.addContactHandler} className= "AddButton">+</button>
+      <div className = "AddContainer" style={{marginTop:'80px', marginLeft:'30px'}}>
+        <Button onClick= {this.addContactHandler} className= "AddButton">+</Button>
       </div>
+
+      </div> 
 
       <Modal show = {this.state.adding} modalClosed = {this.addContactCancelHandler}>
         <AddContact
