@@ -8,10 +8,10 @@ import './App.css';
 
 const config = {
   apiKey: "AIzaSyCoDCRFGKuNj_oBxQiLrClFlHlBlHkJjAQ",
-  authDomain: "tensile-psyche-218000.firebaseapp.com",
-  databaseURL: "https://tensile-psyche-218000.firebaseio.com",
-  projectId: "tensile-psyche-218000",
-  storageBucket: "tensile-psyche-218000.appspot.com",
+  authDomain: "tensile-psyche-218000-89f98.firebaseapp.com",
+  databaseURL: "https://tensile-psyche-218000-89f98.firebaseio.com/",
+  projectId: "tensile-psyche-218000-89f98",
+  storageBucket: "tensile-psyche-218000-89f98.appspot.com",
   messagingSenderId: "271934682296"
 };
 firebase.initializeApp(config)

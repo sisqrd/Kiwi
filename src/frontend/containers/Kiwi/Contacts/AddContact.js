@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class AddContact extends React.Component {
 
   state = {
-    typedName: '',
+    name: '',
     typedRelationship: '',
     typedNumber: '',
     typedMessage: ''
@@ -15,9 +15,9 @@ class AddContact extends React.Component {
 
   handleSubmit = () => {
     let contact = new Object();
-    contact.name = this.state.typedName;
+    contact.name = this.state.name;
     contact.relationship = this.state.typedRelationship;
-    contact.number = this.state.typedName;
+    contact.number = this.state.typedNumber;
     contact.typedMessage = this.state.typedMessage
     this.props.addContact(contact)
     this.props.closeModal()
@@ -26,8 +26,8 @@ class AddContact extends React.Component {
   render(){
     return (
       <div className = "AddContact">
-          <input  placeholder="Contact Name..." name="typedName" onChange = {this.handleChange}></input>
-          <input  placeholder="Relationship with peron..." name="typedRelationship" onChange = {this.handleChange}></input>
+          <input  placeholder="Contact Name..." name="name" onChange = {this.handleChange}></input>
+          <input  placeholder="Relationship with person..." name="typedRelationship" onChange = {this.handleChange}></input>
           <input  placeholder="Person's Number" name="typedNumber" onChange = {this.handleChange}></input>
           <input  placeholder="Emergency Message" name="typedMessage" onChange = {this.handleChange}></input>
 

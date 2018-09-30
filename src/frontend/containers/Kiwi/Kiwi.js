@@ -75,7 +75,7 @@ class Kiwi extends Component {
   }
 
   editContactSubmit = (contact) => {
-    
+
   }
 
   editContactCancelHandler = () => {
@@ -84,8 +84,8 @@ class Kiwi extends Component {
 
   addContactSubmit = (contact) => {
     let contacts = this.state.contacts
-    const userData = firebase.database().ref('userData/'+this.props.userKey);
-    userData.push(contact)
+    // const userData = firebase.database().ref('userData/'+this.props.userKey);
+    // userData.push(contact)
     contacts.push(contact)
     this.setState({contacts: contacts})
     console.log(this.state.contacts)
