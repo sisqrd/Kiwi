@@ -19,7 +19,7 @@ app.post('/kiwi', (req, res) => {
     return client.messages.create({
       to: number,
       from: process.env.TWILIO_MESSAGING_SERVICE_SID,
-      body: "it's ya boy ye"
+      body: "Hi, this is an automated message from Francis. I'm in a tricky situation at home--could you please call or text my number right now and get some help."
     })
   })
   )
