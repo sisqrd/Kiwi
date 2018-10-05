@@ -5,9 +5,9 @@
 <h3><a id="The_Approach_7"></a>The Approach</h3>
 <p>Kiwi is a web application for your Google Home device that allows a user to call a discreet action through their Home speaker and send a distress message to emergency contacts. It listens for a programmable keyword used in any context (in this case “Kiwi”) and triggers a customizable text message to be sent to multiple friends’ or family’s phone numbers. An easy-to-use web interface works alongside the Home device for users to set up an account and input their emergency contacts and messages.</p>
 <ul>
-<li>[Twilio]</li>
-<li>[Google Cloud Platform]</li>
-<li>[Javascript]</li>
-<li>[React.js]</li>
+[Twilio]
+[Google Cloud Platform]
+[Javascript]
+[React.js]
 </ul>
 <h3>We are honored to say that with this application, we placed 1st in HackNY Fall 2018.</h3>
