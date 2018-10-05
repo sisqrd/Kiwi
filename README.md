@@ -10,4 +10,4 @@
 <li>[Javascript]</li>
 <li>[React.js]</li>
 </ul>
-<h2>We are honored to say that with this application, we placed 1st in HackNY Fall 2018.</h2>
+<h3>We are honored to say that with this application, we placed 1st in HackNY Fall 2018.</h3>
