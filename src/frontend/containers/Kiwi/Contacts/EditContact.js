@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import { Container,Button,Form, Input} from 'semantic-ui-react'
 
 class EditContact extends React.Component {
 
@@ -35,14 +36,16 @@ class EditContact extends React.Component {
 
   render(){
     return (
-      <div className = "AddContact">
-          <input  name="typedName" onChange = {this.handleChange} placeholder={this.props.typedName}></input>
-          <input  name="typedRelationship" onChange = {this.handleChange} placeholder={this.props.typedRelationship}></input>
-          <input  name="typedNumber" onChange = {this.handleChange} placeholder={this.props.typedNumber}></input>
-          <input  name="typedMessage" onChange = {this.handleChange} placeholder={this.props.typedMessage}></input>
+      <div className = "EditContact">
+          <Input className = "labels" name="typedName" onChange = {this.handleChange} placeholder={this.props.typedName}></Input>
+          <Input className = "labels" name="typedRelationship" onChange = {this.handleChange} placeholder={this.props.typedRelationship}></Input>
+          <Input className = "labels" name="typedNumber" onChange = {this.handleChange} placeholder={this.props.typedNumber}></Input>
+          <Input className = "labels" name="typedMessage" onChange = {this.handleChange} placeholder={this.props.typedMessage}></Input>
 
-          <button onClick = {this.handleSubmit}>Submit</button>
-          <button onClick = {() => this.props.closeModal()}>Cancel</button>
+          <div>
+            <Button onClick = {this.handleSubmit}>Submit</Button>
+            <Button onClick = {() => this.props.closeModal()}>Cancel</Button>
+          </div>
       </div>
     )
   }

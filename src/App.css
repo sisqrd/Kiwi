@@ -1,4 +1,4 @@
-App.css 
+App.css
 html{
   background-color: #BDEDE0
 
@@ -108,6 +108,7 @@ body {
     z-index: 500;
     background-color: white;
     width: 70%;
+    height: 50%;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 1px black;
     padding: 16px;
@@ -117,5 +118,31 @@ body {
     transition: all 0.3s ease-out;
     display:flex;
     flex-flow: column;
+    align-items: center;
+    justify-content: center;
+
 }
 
+.AddContact {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  flex-direction: column;
+}
+
+.EditContact {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height:100%;
+  flex-direction: column;
+}
+
+.labels {
+  display: flex;
+  border: 1px solid gray;
+  margin: 5px
+}

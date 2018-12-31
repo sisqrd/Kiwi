@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { Container,Button,Form, Input} from 'semantic-ui-react'
 
 class AddContact extends React.Component {
 
@@ -38,13 +39,16 @@ class AddContact extends React.Component {
   render(){
     return (
       <div className = "AddContact">
-          <input  placeholder="Contact Name..." name="name" onChange = {this.handleChange}></input>
-          <input  placeholder="Relationship with person..." name="typedRelationship" onChange = {this.handleChange}></input>
-          <input  placeholder="Person's Number" name="phone" onChange = {this.handleChange}></input>
-          <input  placeholder="Emergency Message" name="message" onChange = {this.handleChange}></input>
+      <Input className = "labels" placeholder="Contact Name..." name="name" onChange = {this.handleChange}></Input>
+      <Input className = "labels" placeholder="Relationship with person..." name="typedRelationship" onChange = {this.handleChange}></Input>
+      <Input className = "labels" placeholder="Person's Number" name="phone" onChange = {this.handleChange}></Input>
+      <Input className = "labels" placeholder="Emergency Message" name="message" onChange = {this.handleChange}></Input>
 
-          <button onClick = {this.handleSubmit}>Submit</button>
-          <button onClick = {() => this.props.closeModal()}>Cancel</button>
+      <div className ="buttons" >
+        <Button onClick = {this.handleSubmit}>Submit</Button>
+        <Button onClick = {() => this.props.closeModal()}>Cancel</Button>
+      </div>
+
       </div>
     )
   }
