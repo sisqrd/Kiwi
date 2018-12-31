@@ -95,11 +95,6 @@ app.post('/register', (req, res) => {
   })
 });
 
-app.post('/contacts', (req, res) => {
-  contacts = req.body.contacts;
-}
-)
-
 app.post('/addContact', (req, res) => {
   new Contact({
     user: req.body.userId,
@@ -165,9 +160,6 @@ app.post('/kiwi', (req, res) => {
         to: contact.number,
         from: process.env.TWILIO_MESSAGING_SERVICE_SID,
         body: contact.typedMessage
-        // to: '+19175260377',
-        // from: process.env.TWILIO_MESSAGING_SERVICE_SID,
-        // body: 'help'
       })
     })
   )
