@@ -11,39 +11,31 @@ import { Checkbox,Card, Button, Icon, Image, Item, Label,Form, Container} from '
 class Kiwi extends Component {
 
   state = {
+    userId: this.props.userId,
     adding: false,
     editing: false,
     contacts: [],
     editContact: {
+      contactId: '',
       name: '',
-      number: '',
+      phone: '',
       relationship: '',
-      typedMessage: ''
+      message: '',
+      index: 0,
     }
   }
 
   componentDidMount() {
     let contacts = []
-    const userData = firebase.database().ref().child('userData/'+this.props.userKey)
-    userData.once('value')
-    .then(snapshot => {
-      snapshot.forEach(childSnapshot => {
-        const childData = childSnapshot.val()
-        if (childData.name != undefined) {
-        let emergencyContact = {
-          name: childData.name,
-          number: childData.number,
-          relationship: childData.relationship,
-          typedMessage: childData.typedMessage
-        }
-        contacts.push(emergencyContact)
-        this.setState({contacts: contacts})
-      }
+
+    axios.get('http://localhost:8888/getContacts/'+this.state.userId)
+    .then(response => {
+      this.setState({
+        contacts: response.data
       })
     })
-  }
 
-  // editContactSubmit =
+  }
 
   editContactHandler = (contact, index) => {
     console.log(index)
@@ -54,28 +46,23 @@ class Kiwi extends Component {
     this.setState({
       editing: true,
       editContact: {
+        contactId: editedContact._id,
         name: editedContact.name,
-        number: editedContact.number,
+        phone: editedContact.phone,
         relationship: editedContact.relationship,
-        typedMessage: editedContact.typedMessage
+        message: editedContact.message,
+        index: contactIndex
       }
     })
-    // let contacts = []
-    // const userData = firebase.database().ref().child('userData/'+this.props.userKey)
-    // userData.once('value')
-    // .then(snapshot => {
-    //   snapshot.forEach(childSnapshot => {
-    //     const childData = childSnapshot.val()
-    //     if (childData.name != undefined) {
-    //       contacts.push(childData)
-    //   }
-    //   })
-    //   console.log(contacts)
-    // })
+
   }
 
-  editContactSubmit = (contact) => {
-
+  editContactSubmit = (contact, index) => {
+    let editedContacts = this.state.contacts;
+    editedContacts[index] = contact;
+    this.setState({
+      contacts: editedContacts
+    })
   }
 
   editContactCancelHandler = () => {
@@ -84,20 +71,8 @@ class Kiwi extends Component {
 
   addContactSubmit = (contact) => {
     let contacts = this.state.contacts
-    // const userData = firebase.database().ref('userData/'+this.props.userKey);
-    // userData.push(contact)
     contacts.push(contact)
     this.setState({contacts: contacts})
-    console.log(this.state.contacts)
-    axios.post('/contacts', {
-      contacts: this.state.contacts
-    })
-    .then(response => {
-    console.log(response);
-    })
-    .catch(error => {
-    console.log(error.response);
-    });
   }
 
   addContactHandler = () => {
@@ -111,7 +86,7 @@ class Kiwi extends Component {
   render(){
     return(
     <Auxilary>
-      <div style={{margin:'20px'}}> 
+      <div style={{margin:'20px'}}>
       <div className = 'ContactList' style={{margin:'20px', marginTop:'100px', marginLeft:'30px', marginRight:'30px'}}>
       <Card.Group itemsPerRow={5}>
         {this.state.contacts.map( (contact, index) =>
@@ -120,30 +95,31 @@ class Kiwi extends Component {
                   style={{height:'100%', padding:'15px'}}
               >
 
-               <label style={{fontWeight:'bold'}} > Name: </label> 
+               <label style={{fontWeight:'bold'}} > Name: </label>
                {contact.name}
-               <label style={{fontWeight:'bold'}} > Relationship: </label> 
+               <label style={{fontWeight:'bold'}} > Relationship: </label>
                {contact.relationship}
-               <label style={{fontWeight:'bold'}} > Number: </label> 
-               {contact.number}
-               <label style={{fontWeight:'bold'}} > Message: </label> 
-               {contact.typedMessage}
+               <label style={{fontWeight:'bold'}} > Number: </label>
+               {contact.phone}
+               <label style={{fontWeight:'bold'}} > Message: </label>
+               {contact.message}
             <Button basic color ='olive' onClick = {contact => this.editContactHandler(contact, index)}>Edit</Button>
-            </Card> 
+            </Card>
           </Auxilary>
       )
       }
-      </Card.Group> 
+      </Card.Group>
       </div>
 
       <div className = "AddContainer" style={{marginTop:'80px', marginLeft:'30px'}}>
         <Button onClick= {this.addContactHandler} className= "AddButton">+</Button>
       </div>
 
-      </div> 
+      </div>
 
       <Modal show = {this.state.adding} modalClosed = {this.addContactCancelHandler}>
         <AddContact
+          userId = {this.state.userId}
           addContact = {this.addContactSubmit}
           closeModal = {this.addContactCancelHandler}
         />
@@ -151,10 +127,12 @@ class Kiwi extends Component {
 
       <Modal show={this.state.editing} modalClosed={this.editContactCancelHandler}>
         <EditContact
+          contactId = {this.state.editContact["contactId"]}
+          index = {this.state.editContact["index"]}
           typedName = {this.state.editContact["name"]}
           typedRelationship = {this.state.editContact["relationship"]}
-          typedNumber = {this.state.editContact["number"]}
-          typedMessage = {this.state.editContact["typedMessage"]}
+          typedNumber = {this.state.editContact["phone"]}
+          typedMessage = {this.state.editContact["message"]}
           editContact = {this.editContactSubmit}
           closeModal = {this.editContactCancelHandler}
         />

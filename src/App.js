@@ -3,7 +3,8 @@ import firebase from 'firebase';
 import Layout from './frontend/components/Layout/Layout';
 import Register from './frontend/containers/Register/Register';
 import Login from './frontend/containers/Login/Login';
-import Kiwi from './frontend/containers/Kiwi/Kiwi'
+import Kiwi from './frontend/containers/Kiwi/Kiwi';
+import axios from 'axios';
 import './App.css';
 
 const config = {
@@ -19,13 +20,13 @@ firebase.initializeApp(config)
 class App extends Component {
 
   state = {
-    logIn: true,
+    userId: '',
+    login: true,
     loggedIn: false,
     register: false,
     username: '',
     password: '',
     confirmPassword: '',
-    userKey: ''
   }
 
   handleChange = (event) => {
@@ -35,73 +36,69 @@ class App extends Component {
   onRegisterClick = () => {
     this.setState({
       register: !this.state.register,
-      logIn: !this.state.logIn
+      login: !this.state.login
     })
   }
 
   handleLogin = (event) => {
-    event.preventDefault();
-    const query = firebase.database().ref('userData')
-    query.once('value')
-    .then(snapshot => {
-      snapshot.forEach(childSnapshot => {
-        const childData = childSnapshot.val()
-        if (this.state.username === childData.username && this.state.password === childData.password) {
-          this.setState({
-            loggedIn: !this.state.loggedIn,
-            logIn: !this.state.logIn,
-            userKey: childSnapshot.key
-          })
-        } else if (this.state.username === childData.username) {
-          alert('Incorrect Password')
-        }
-      })
+    let user = this.state.username;
+    let pass = this.state.password;
+    console.log(user);
+    console.log(pass);
+    axios.post('http://localhost:8888/login', {
+      username: user,
+      password: pass
+    })
+    .then( (resp) => {
+      if (resp.data.success) {
+        this.setState({
+          userId: resp.data.userId,
+          login: false,
+          register: false,
+          loggedIn: true
+        })
+      }
+      else {
+        console.log('error');
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
     })
   };
 
   handleRegister = (event) => {
-    event.preventDefault();
-    if (this.state.confirmPassword === this.state.password) {
-      const userData = firebase.database().ref('userData');
-      userData.once('value')
-      .then(snapshot => {
-        snapshot.forEach(childSnapshot => {
-          const childData = childSnapshot.val()
-          if (this.state.username === childData.username && this.state.password === childData.password) {
-            alert('Account already exists. Please log in.')
-            this.setState({
-              register: !this.state.register,
-              logIn: !this.state.logIn
-            })
-          } else {
-            const accountInfo = {
-              username: this.state.username,
-              password: this.state.password
-            }
-            userData.push(accountInfo);
-            this.setState({
-              userKey: childSnapshot.key
-            })
-          }
-        })
+    let user = this.state.username;
+    let pass = this.state.password;
+    console.log(user);
+    console.log(pass);
+    if(pass === this.state.confirmPassword) {
+      axios.post('http://localhost:8888/register', {
+        username: user,
+        password: pass
+      })
+      .then( resp => {
+        console.log(resp);
         this.setState({
-          loggedIn: !this.state.loggedIn,
-          register: !this.state.register,
+          loggedIn: true,
+          register: false,
+          login: false
         });
       })
-    } else {
-      alert('Passwords must match.');
+      .catch(function (error) {
+        console.log(error);
+      })
     }
   }
 
   render() {
     return (
       <div className="App">
-        <Layout>
-          {this.state.register ? <Register handleChange={this.handleChange} handleRegister={this.handleRegister} /> : null}
-          {this.state.logIn ? <Login handleChange={this.handleChange} handleLogin={this.handleLogin} onRegisterClick={this.onRegisterClick} /> : null}
-          {this.state.loggedIn ? <Kiwi userKey={this.state.userKey} /> : null}
-        </Layout>
+      <Layout>
+      {this.state.register ? <Register handleChange={this.handleChange} handleRegister={this.handleRegister} /> : null}
+      {this.state.login ? <Login handleChange={this.handleChange} handleLogin={this.handleLogin} onRegisterClick={this.onRegisterClick} /> : null}
+      {this.state.loggedIn ? <Kiwi userId={this.state.userId} /> : null}
+      </Layout>
       </div>
     );
   }

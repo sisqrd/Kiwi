@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios'
 
 class EditContact extends React.Component {
 
@@ -17,19 +18,28 @@ class EditContact extends React.Component {
     let contact = new Object();
     contact.name = this.state.typedName;
     contact.relationship = this.state.typedRelationship;
-    contact.number = this.state.typedName;
-    contact.typedMessage = this.state.typedMessage
-    this.props.editContactSubmit(contact)
+    contact.phone = this.state.typedName;
+    contact.message = this.state.typedMessage;
+
+    axios.post('http://localhost:8888/editContact', {
+      contactId: this.props.contactId,
+      name: contact.name,
+      relationship: contact.relationship,
+      phone: contact.phone,
+      message: contact.message
+    })
+
+    this.props.editContact(contact, this.props.index)
     this.props.closeModal()
   }
 
   render(){
     return (
       <div className = "AddContact">
-          <input  placeholder="Contact Name..." name="typedName" onChange = {this.handleChange} value={this.props.typedName}></input>
-          <input  placeholder="Relationship with peron..." name="typedRelationship" onChange = {this.handleChange} value={this.props.typedRelationship}></input>
-          <input  placeholder="Person's Number" name="typedNumber" onChange = {this.handleChange} value={this.props.typedNumber}></input>
-          <input  placeholder="Emergency Message" name="typedMessage" onChange = {this.handleChange} value={this.props.typedMessage}></input>
+          <input  name="typedName" onChange = {this.handleChange} placeholder={this.props.typedName}></input>
+          <input  name="typedRelationship" onChange = {this.handleChange} placeholder={this.props.typedRelationship}></input>
+          <input  name="typedNumber" onChange = {this.handleChange} placeholder={this.props.typedNumber}></input>
+          <input  name="typedMessage" onChange = {this.handleChange} placeholder={this.props.typedMessage}></input>
 
           <button onClick = {this.handleSubmit}>Submit</button>
           <button onClick = {() => this.props.closeModal()}>Cancel</button>

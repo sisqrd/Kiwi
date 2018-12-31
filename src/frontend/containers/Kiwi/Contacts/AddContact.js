@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 class AddContact extends React.Component {
 
   state = {
     name: '',
     typedRelationship: '',
-    typedNumber: '',
-    typedMessage: ''
+    phone: '',
+    message: ''
   }
 
   handleChange = (event) => {
@@ -17,10 +18,21 @@ class AddContact extends React.Component {
     let contact = new Object();
     contact.name = this.state.name;
     contact.relationship = this.state.typedRelationship;
-    contact.number = this.state.typedNumber;
-    contact.typedMessage = this.state.typedMessage
-    this.props.addContact(contact)
-    this.props.closeModal()
+    contact.phone = this.state.phone;
+    contact.message = this.state.message;
+
+    axios.post('http://localhost:8888/addContact', {
+      userId: this.props.userId,
+      name: contact.name,
+      relationship: contact.relationship,
+      phone: contact.phone,
+      message: contact.message
+    })
+    .then( (resp) => {
+      this.props.addContact(contact)
+      this.props.closeModal()
+    })
+
   }
 
   render(){
@@ -28,8 +40,8 @@ class AddContact extends React.Component {
       <div className = "AddContact">
           <input  placeholder="Contact Name..." name="name" onChange = {this.handleChange}></input>
           <input  placeholder="Relationship with person..." name="typedRelationship" onChange = {this.handleChange}></input>
-          <input  placeholder="Person's Number" name="typedNumber" onChange = {this.handleChange}></input>
-          <input  placeholder="Emergency Message" name="typedMessage" onChange = {this.handleChange}></input>
+          <input  placeholder="Person's Number" name="phone" onChange = {this.handleChange}></input>
+          <input  placeholder="Emergency Message" name="message" onChange = {this.handleChange}></input>
 
           <button onClick = {this.handleSubmit}>Submit</button>
           <button onClick = {() => this.props.closeModal()}>Cancel</button>
