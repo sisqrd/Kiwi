@@ -19,7 +19,7 @@ class EditContact extends React.Component {
     let contact = new Object();
     contact.name = this.state.typedName;
     contact.relationship = this.state.typedRelationship;
-    contact.phone = this.state.typedName;
+    contact.phone = this.state.typedNumber;
     contact.message = this.state.typedMessage;
 
     axios.post('http://localhost:8888/editContact', {

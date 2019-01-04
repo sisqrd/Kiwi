@@ -27,19 +27,15 @@ class Kiwi extends Component {
 
   componentDidMount() {
     let contacts = []
-
     axios.get('http://localhost:8888/getContacts/'+this.state.userId)
     .then(response => {
       this.setState({
         contacts: response.data
       })
     })
-
   }
 
   editContactHandler = (contact, index) => {
-    console.log(index)
-    console.log(this.state.contacts[index])
     let editedContact = this.state.contacts[index];
     let contactIndex = index;
 
@@ -94,7 +90,6 @@ class Kiwi extends Component {
             <Card
                   style={{height:'100%', padding:'15px'}}
               >
-
                <label style={{fontWeight:'bold'}} > Name: </label>
                {contact.name}
                <label style={{fontWeight:'bold'}} > Relationship: </label>

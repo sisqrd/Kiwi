@@ -29,25 +29,23 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-let contacts = []
-
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
-});
+let mainId;
 
 app.get('/getContacts/:userId', (req, res) => {
   let userId = req.params.userId;
+  mainId = req.params.userId;
   Contact.find({
     user: userId
   })
   .populate('contacts')
-  .exec((err, contacts) => {
+  .exec((err, contactArr) => {
     if (err) {
       console.log('ERROR');
       console.log(err);
       return;
     }
-    return res.send(contacts);
+    console.log(contactArr);
+    return res.send(contactArr);
   })
 })
 
@@ -113,10 +111,9 @@ app.post('/addContact', (req, res) => {
           _id: contact.user
         }, (err, user) => {
           if(user){
-            console.log(user.contacts);
             user.contacts.push(contact);
-            console.log(user.contacts);
             user.save();
+            contacts = user.contacts;
             return res.send('Contact has been added!');
           }
           else {
@@ -128,7 +125,6 @@ app.post('/addContact', (req, res) => {
 })
 
 app.post('/editContact', (req, res) =>{
-  console.log(req.body);
   Contact.findOne({
     _id: req.body.contactId
   }, (err, contact) => {
@@ -152,7 +148,21 @@ app.post('/editContact', (req, res) =>{
 })
 
 app.post('/kiwi', (req, res) => {
-  //get request to twilio
+
+  let contacts = [];
+
+  Contact.find({
+    user: userId
+  })
+  .populate('contacts')
+  .exec((err, contactArr) => {
+    if (err) {
+      console.log('ERROR');
+      console.log(err);
+      return;
+    }
+    contacts = contactArr;
+  })
 
   Promise.all(
     contacts.map(contact => {
