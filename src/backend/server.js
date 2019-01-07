@@ -40,7 +40,6 @@ app.get('/getContacts/:userId', (req, res) => {
   .populate('contacts')
   .exec((err, contactArr) => {
     if (err) {
-      console.log('ERROR');
       console.log(err);
       return;
     }
@@ -114,7 +113,7 @@ app.post('/addContact', (req, res) => {
             user.contacts.push(contact);
             user.save();
             contacts = user.contacts;
-            return res.send('Contact has been added!');
+            return res.send(contact._id);
           }
           else {
             res.send('User not found');
@@ -133,7 +132,6 @@ app.post('/editContact', (req, res) =>{
       return;
     }
     if(contact){
-      console.log(req);
       contact.name = req.body.name;
       contact.relationship = req.body.relationship;
       contact.phone = req.body.phone;
@@ -143,6 +141,18 @@ app.post('/editContact', (req, res) =>{
     }
     else {
       return res.send('Contact is not found!')
+    }
+  })
+})
+
+app.get('/deleteContact/:contactId', (req, res) => {
+  let deleteId = req.params.contactId;
+  Contact.deleteOne({
+    _id: deleteId
+  }, (err, success) => {
+    if (err) return next({err})
+    else if (!err) {
+      return res.send('Contact has been deleted.')
     }
   })
 })
@@ -157,7 +167,6 @@ app.post('/kiwi', (req, res) => {
   .populate('contacts')
   .exec((err, contactArr) => {
     if (err) {
-      console.log('ERROR');
       console.log(err);
       return;
     }

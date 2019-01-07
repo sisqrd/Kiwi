@@ -32,8 +32,6 @@ class App extends Component {
   handleLogin = (event) => {
     let user = this.state.username;
     let pass = this.state.password;
-    console.log(user);
-    console.log(pass);
     axios.post('http://localhost:8888/login', {
       username: user,
       password: pass
@@ -59,15 +57,12 @@ class App extends Component {
   handleRegister = (event) => {
     let user = this.state.username;
     let pass = this.state.password;
-    console.log(user);
-    console.log(pass);
     if(pass === this.state.confirmPassword) {
       axios.post('http://localhost:8888/register', {
         username: user,
         password: pass
       })
       .then( resp => {
-        console.log(resp);
         this.setState({
           loggedIn: true,
           register: false,

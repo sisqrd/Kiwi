@@ -30,6 +30,7 @@ class AddContact extends React.Component {
       message: contact.message
     })
     .then( (resp) => {
+      contact._id = resp.data;
       this.props.addContact(contact)
       this.props.closeModal()
     })

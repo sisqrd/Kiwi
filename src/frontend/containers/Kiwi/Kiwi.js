@@ -79,6 +79,19 @@ class Kiwi extends Component {
     this.setState({adding: false});
   }
 
+  deleteContactHandler = (contact, index) => {
+    let deleteContact = this.state.contacts[index];
+    let newArr = this.state.contacts;
+    newArr.splice(index, 1);
+    axios.get('http://localhost:8888/getContacts/'+this.state.userId)
+    axios.get('http://localhost:8888/deleteContact/'+deleteContact._id)
+      .then(response => {
+        this.setState({
+          contacts: newArr
+        });
+      });
+  }
+
   render(){
     return(
     <Auxilary>
@@ -99,6 +112,8 @@ class Kiwi extends Component {
                <label style={{fontWeight:'bold'}} > Message: </label>
                {contact.message}
             <Button basic color ='olive' onClick = {contact => this.editContactHandler(contact, index)}>Edit</Button>
+            <br />
+            <Button basic color ='red' onClick = {contact => this.deleteContactHandler(contact, index)}>Delete</Button>
             </Card>
           </Auxilary>
       )
